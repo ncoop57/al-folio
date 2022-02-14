@@ -18,15 +18,15 @@ I will be going through some of the amazing things that are happening in that br
 
 In the amazing book "**[Thinking Fast and Slow](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)**" by Daniel Kahneman, who is a world renowned economist and neuroscientist, the high level ways in which we “think” are examined. In this book,  things like decisions, problem solving, emotional states, and why we make errors in our logic, both consciously and subconsciously, are shown. I highly recommend this book, I personally have been enjoying the [Audiobook](https://www.audible.com/pd/Thinking-Fast-and-Slow-Audiobook/B005TKKCWC) version!
 
-![Overview of the two different Systems that make up your thinking.]({{ site.baseurl }}/img/neuroscience/systems.png)
-
-*Overview of the two different Systems that make up your thinking.*
+{% include figure.html path="assets/img/neuroscience/systems.png" class="img-fluid rounded z-depth-1" zoomable=true %}
+<div class="caption">
+    Overview of the two different Systems that make up your thinking.
+</div>
 
 Daniel Kahneman introduced the idea of two systems of thought, which he named very creatively System 1 and System 2. System 1 is more associated with intuition or *fast thinking* that processes things without much mental strain such as looking at a picture of a cat and understanding that what you are currently looking at is in fact a cat. System 1 is also automatic in the sense that you have no control over coming to the realization that a cat is in the picture. System 2, on the other hand, is involved in more deliberate and difficult processing that requires you to put in work for solving some task such as calculating that the multiplication of 18 and 32 is equal to 576. don’t worry, I’ll wait :).
 
-![A Cat]({{ site.baseurl }}/img/neuroscience/image_0.jpg)
-
-*A Cat: Image by **[Free-Photos](https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=984097)** from **[Pixabay](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=984097)***
+{% include figure.html path="assets/img/neuroscience/image_0.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+*A Cat: Image by [Free-Photos](https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=984097)** from **[Pixabay](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=984097)***
 
 Yoshua Bengio, who is a pioneer of artificial intelligence and recent receiver of the Turing award along with other amazing scientists in the field, put it quite well on how these two systems work together. System 1 is great at generating representations of things and associating them with high level objects such as cats, words, and concepts. These representations are then exploited by System 2 to avoid all of the nitty gritty details of what it means for a cat to be a cat. It instead uses these concepts to do interesting things such as finding relationships between multiple objects or performing complex calculations by planning out a series of operations to perform, i.e. generating and following an algorithm for multiplying 2 numbers.
 
@@ -46,24 +46,25 @@ Our daily lives and thought process circulate around when to use System 2 for ta
 
 Now, your brain does not actually have these System 1 and System 2 structures physically, they are just a great way of discussing the way in which your brain works. However, the real way your brain is structured is a lot more messy, but still beautiful :). I found the explanation and structure of how your brain is wired in "**[Computational Cognitive Neuroscience](https://grey.colorado.edu/mediawiki/sites/CompCogNeuro/images/0/0e/ccnbook_08_2016.pdf)**" by Munakata et. al. to be a great resource for learning and so I will be using it as my main source for the rest of this article. While it is a lot denser than “**Thinking Fast and Slow,**” it has great visualizations and goes quite in depth.
 
-<!-- ![Different lobes of the human brain.]({{ site.baseurl }}/images/neuroscience/image_1.png) -->
-
 {% include figure.html path="assets/img/neuroscience/image_1.png" class="img-fluid rounded z-depth-1" zoomable=true %}
-
+<div class="caption">
+    Different lobes of the human brain.
+</div>
 
 *Image by **[Oberholster Venita](https://pixabay.com/users/ArtsyBee-462611/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1007686)** from **[Pixabay](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1007686)** (Modified to have labels)*
 
 Your brain can be organized into two main parts, the Neocortex, which is what most people think of when they imagine a brain, and the Cerebellum, which is not as well known by most but is believed to play a big part in how we think. The Neocortex is the coloured part in the above image and it can be roughly broken down into 4 main *lobes*, but each lobe is heavily dependent on the others, so don’t think of them as truly distinct sections. You can see the responsibilities of each lobe in the table below.
 
-![Overall responsibilities of the different lobes of the brain.]({{ site.baseurl }}/images/neuroscience/image_3.png)
-
-*Overall responsibilities of the different lobes of the brain.*
+{% include figure.html path="assets/img/neuroscience/image_3.png" class="img-fluid rounded z-depth-1" zoomable=true %}
+<div class="caption">
+    Overall responsibilities of the different lobes of the brain.
+</div>
 
 One of the most interesting parts of your brain structure is how representations of your senses like sight and sound are built up in a hierarchical fashion as your brain moves the information across the different lobes. Take your ability to easily understand what your eyes are currently seeing. This information is first processed by the Occipital lobe hierarchically at the very back of the brain, starting with identifying simple edges and then moving on to groups of edges to form basic shapes. This representation grows in complexity as the information is sent towards the other parts of the brain like the Temporal lobe where these representations are given semantic meaning in the form of words such as Cat or Human or even more specific such as Garfield the Cat. If we track the representation that your brain is building of what you are seeing into the Parietal lobe, you will find your brain generating representations for relations between the different objects in the scene such as the Cat is hanging from a tree (hang in there buddy!). Lastly, the Frontal lobe takes all these high level representations to perform any number of high level decisions and motor control movement such as petting the kitty :).
 
 As you can see, even this very simple example of just processing what your eyes see involves multiple parts of your brain, even if a lot of the initial work is done by the Occipital lobe. Each lobe does its part in helping generate an understanding of the sensory input you are receiving. This is not just limited to vision, but could be any other type of senses such as smell, touch, and hearing. It’s all connected...
 
-![Pepe Silvia Meme from It’s Always Sunny in Philadelphia. It's all connected]({{ site.baseurl }}/images/neuroscience/image_2.png)
+{% include figure.html path="assets/img/neuroscience/image_2.png" class="img-fluid rounded z-depth-1" zoomable=true %}
 
 *[Pepe Silvia](https://knowyourmeme.com/memes/pepe-silvia) from It’s Always Sunny in Philadelphia*
 
