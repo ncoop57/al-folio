@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Stable Code
-description: Code Assistance/ Developer Productivity suite of Models
+description: Code Assistance / Developer Productivity suite of Models
 img: assets/img/stablecodelogo.png
 importance: 1
 category: work
@@ -13,7 +13,7 @@ category: work
     </div>
 </div>
 <div class="caption">
-    This image can also have a caption. It's like magic.
+    A futuristic robotic software developer sitting and typing at a desk with a computer with dual monitors. There is another robot on a pedestal in the background and some maps and blueprints on the wall.
 </div>
 
 You can also put regular text between your rows of images.
