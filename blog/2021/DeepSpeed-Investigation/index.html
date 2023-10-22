@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>        
+    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nathan A. Cooper | DeepSpeed Investigation: What I Learned</title>
+    <meta name="author" content="Nathan A. Cooper" />
+    <meta name="description" content="An investigation into the awesome DeepSpeed library for training large models on a single GPU!" />
+    <meta name="keywords" content="sofware-engineering, computer-science, nathan-cooper, portfolio-website" />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+    <!-- Styles -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤓</text></svg>">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://ncoop57.github.io/blog/2021/DeepSpeed-Investigation/">
+
+    <!-- Dark Mode -->
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="https://ncoop57.github.io/"><span class="font-weight-bold">Nathan</span> A.  Cooper</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">blog</a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">projects</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/publications/">publications</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <div class="toggle-container">
+                <a id="light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </a>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">DeepSpeed Investigation: What I Learned</h1>
+    <p class="post-meta">May 3, 2021• Nathan Cooper</p>
+    <p class="post-tags">
+      <a href="/blog/2021"> <i class="fas fa-calendar fa-sm"></i> 2021 </a>
+        ·  
+        <a href="/blog/category/deepspeed">
+          <i class="fas fa-tag fa-sm"></i> deepspeed</a>  
+          <a href="/blog/category/deep-learning">
+          <i class="fas fa-tag fa-sm"></i> deep-learning</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>Deep learning is awesome, but the large compute and data requirements can prevent a lot of amazing people from using the models and contributing to the field. So, when I read about the amazing <a href="https://www.deepspeed.ai/" target="_blank" rel="noopener noreferrer">DeepSpeed</a> library allowing people with just a single GPU (like myself) to train massive models that would normally require multiple GPUs to just fit in memory, I had to investigate further!</p>
+
+<h2 id="what-is-deepspeed">What is DeepSpeed?</h2>
+
+<p>Here is a brief blurb from the DeepSpeed website on what it is and what it can do:</p>
+
+<p>“</p>
+
+<p>DeepSpeed is a deep learning optimization library that makes distributed training easy, efficient, and effective.</p>
+
+<p><strong><em>10x Larger Models</em></strong></p>
+
+<p><strong><em>10x Faster Training</em></strong></p>
+
+<p><strong><em>Minimal Code Change</em></strong></p>
+
+<p>DeepSpeed delivers extreme-scale model training for everyone, from data scientists training on massive supercomputers to those training on low-end clusters or even on a single GPU</p>
+
+<p>“</p>
+
+<p>Some impressive statements, but are they true? Kind of. Let’s dig a bit deeper into how this works.</p>
+
+<figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://www.microsoft.com/en-us/research/uploads/prod/2020/05/1400x788DeepSpeedslowed.gif-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="https://www.microsoft.com/en-us/research/uploads/prod/2020/05/1400x788DeepSpeedslowed.gif-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="https://www.microsoft.com/en-us/research/uploads/prod/2020/05/1400x788DeepSpeedslowed.gif-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://www.microsoft.com/en-us/research/uploads/prod/2020/05/1400x788DeepSpeedslowed.gif" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+<div class="caption">
+    Overview of the large improvement ZeRO-2 and the DeepSpeed library has over ZeRO-2 and previous approaches.
+    <br>
+    From https://www.microsoft.com/en-us/research/blog/zero-2-deepspeed-shattering-barriers-of-deep-learning-speed-scale/
+</div>
+
+<p>DeepSpeed is a library that enables the awesome <a href="https://arxiv.org/abs/1910.02054" target="_blank" rel="noopener noreferrer">Zero Redundancy Optimizer (ZeRO)</a>, which is a highly optimized optimizer (oh how clever) that improves memory management and communication in data or model parallelized work loads by removing redundancy. Now, this might bring up the question “parallelized work loads, I thought we could use this on a single GPU, what’s the deal?” So, the deal is that ZeRO was made to solve the problem of communication between multiple devices by doing some nifty memory tricks that are beyond the scope of this blog post (and my understanding. See <a href="https://youtu.be/tC01FRB0M7w" target="_blank" rel="noopener noreferrer">here</a> for a full explanation of this.). It just so happens that the ZeRO optimizer also performs CPU offloading, which moves some of the computation off your GPU and onto your CPU. With things being computed on your CPU, some of the model is stored in RAM rather than the GPUs VRAM. This significantly slows computation since CPUs and RAM wasn’t built with this in mind, but it means you are allowed to train bigger models and train with bigger batch sizes 🤓.</p>
+
+<h2 id="putting-deepspeed-to-the-test">Putting DeepSpeed to the Test!</h2>
+
+<p>To test out DeepSpeed, I used the awesome HuggingFace transformers library, which supports using DeepSpeed on their non-stable branch (though support is coming to the stable branch in 4.6 🤓). I followed these awesome <a href="https://huggingface.co/transformers/master/main_classes/trainer.html#deepspeed" target="_blank" rel="noopener noreferrer">instructions</a> on the HuggingFace’s website for getting started with DeepSpeed and HuggingFace. If you want to follow along at home, I created a Github <a href="https://github.com/ncoop57/deepspeed_testing" target="_blank" rel="noopener noreferrer">repository</a> with the Dockerfile (I’m addicted to docker and will probably make a blog post on docker too :)) and the test script I used to run my experiments on. I tried training the different versions of the awesome <a href="https://arxiv.org/abs/1910.10683" target="_blank" rel="noopener noreferrer">T5 model</a> that ranged from smallish ~60 million parameters to humungous 3 billion parameters. And here are my results:</p>
+
+<figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/deepspeed_chart-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/deepspeed_chart-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/deepspeed_chart-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/deepspeed_chart.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+<div class="caption">
+    Bar chart showing DeepSpeed increases time to train, but allows training larger models compared to not using DeepSpeed.
+    <br>
+    This was run on a machine with Ubuntu 20.04, 32GBs of RAM, Ryzen 5600x, and NVIDIA RTX 3080 GPU.
+</div>
+
+<p>This is a chart of the different models’ training time in seconds with and without DeepSpeed and the biggest batch size I could fit for each. As you can see, using DeepSpeed increases training time, except for t5-small where the time is nearly identical. However, you’ll notice for t5-base (~220 million parameters) and t5-large (~770 million parameters) I am able to use a larger batch size, this is most noticable in the t5-large model where I can double the batch size. This is the important part that DeepSpeed gives you, it allows you to use larger batch sizes even if it increases the training time. Having large batch sizes is critical for many deep learning models as it allows the model to see more examples when doing updates thereby improving performance. This is the use case of using DeepSpeed, using big models with large batch sizes. If what you are doing doesn’t involve these two things, then you probably should skip DeepSpeed.</p>
+
+<p><strong>Note:</strong> You’ll notice there is no bar for a 3 billion parameter model (t5-3b). This is because my PC cried out when I attempted to train the model even with DeepSpeed and a batch size of 1.</p>
+
+<h2 id="conclusion-time">Conclusion Time</h2>
+
+<p>So, with all things considered, DeepSpeed is an awesome library and ZeRO is an amazing optimizer. However, if you were looking for super speed boosts for a single GPU like I was, it ain’t it chief. ZeRO is designed for speeding up multi-GPU setups by efficiently handling memory resources and communication and in doing so does reduce the memory footprint on GPUs. It also does some awesome CPU offloading, which will allow you to train huge models with large batch sizes on a single GPU that you would not be able to normally. The part of larger batch sizes is super important for many deep learning models as it can improve their performance. So, my take away from this investigation is this: If you are using a multi-GPU setup, DeepSpeed is the way to go. However, for single GPU uses, only use it if you need a larger model andlarger batch sizes than what your normal GPU can handle.</p>
+
+<p>Hope you’ve enjoyed this blog post and learned some information along the way. Comment down below with any questions you have, I’d be happy to help answer them!</p>
+
+<p>Connect with me:</p>
+
+<p>Website - <a href="https://nathancooper.io/#/" target="_blank" rel="noopener noreferrer">https://nathancooper.io/#/</a></p>
+
+<p>YouTube - <a href="https://www.youtube.com/channel/UCKfOCnojK5YV7_hdPjAtY7Q" target="_blank" rel="noopener noreferrer">https://www.youtube.com/channel/UCKfOCnojK5YV7_hdPjAtY7Q</a></p>
+
+<p>Github - <a href="https://github.com/ncoop57" target="_blank" rel="noopener noreferrer">https://github.com/ncoop57</a></p>
+
+<p>Twitter - <a href="https://twitter.com/ncooper57" target="_blank" rel="noopener noreferrer">https://twitter.com/ncooper57</a></p>
+
+<p>LinkedIn - <a href="https://www.linkedin.com/in/nathan-cooper-820292106/" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/nathan-cooper-820292106/</a></p>
+
+  </article><div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname  = 'nerd';
+      var disqus_identifier = '/blog/2021/DeepSpeed-Investigation';
+      var disqus_title      = "DeepSpeed Investigation: What I Learned";
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" target="_blank" rel="noopener noreferrer">comments powered by Disqus.</a>
+</noscript>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2023 Nathan A. Cooper. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Mansory & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="/assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+  </body>
+</html>
+
